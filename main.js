@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", render);
-
-async function render() {
+const render = async () => {
   const showProduct = document.querySelector(".show__product");
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const logoutBtn = document.getElementById("logoutBtn");
@@ -18,33 +16,37 @@ async function render() {
 
   showProduct.innerHTML = data
     .map(
-      (item) => `
+      ({ name, price, id }) => `
       <tr>
-        <td>${item.name}</td>
-        <td>${item.price}</td>
+        <td>${name}</td>
+        <td>${price}</td>
         <td>
-          <a href="./edit.html?id=${item.id}"><button class="btn btn-warning">Update</button></a>
-          <button data-id="${item.id}" class="btn btn-danger btn__delete">Delete</button>
+          <a href="./edit.html?id=${id}"><button class="btn btn-warning">Update</button></a>
+          <button data-id="${id}" class="btn btn-danger btn__delete">Delete</button>
         </td>
       </tr>
     `,
     )
     .join("");
 
-  document.querySelectorAll(".btn__delete").forEach((item) => {
-    item.addEventListener("click", async (e) => {
-      e.preventDefault();
-      if (confirm("Bạn chắc chứ ?")) {
-        await fetch(`http://localhost:3000/products/${item.dataset.id}`, {
-          method: "DELETE",
-        });
-        await render();
-      }
-    });
+  document.querySelectorAll(".btn__delete").forEach((btn) => {
+    btn.addEventListener("click", deleteProduct);
   });
-}
+};
 
-function logout() {
+const deleteProduct = async (e) => {
+  e.preventDefault();
+  if (confirm("Bạn chắc chứ ?")) {
+    await fetch(`http://localhost:3000/products/${e.target.dataset.id}`, {
+      method: "DELETE",
+    });
+    await render();
+  }
+};
+
+document.addEventListener("DOMContentLoaded", render);
+
+const logout = () => {
   localStorage.removeItem("currentUser");
   window.location.href = "./login.html";
-}
+};

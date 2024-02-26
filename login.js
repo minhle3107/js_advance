@@ -1,9 +1,22 @@
-async function login() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+const login = async () => {
+  const usernameInput = document.getElementById("username");
+  const passwordInput = document.getElementById("password");
+  const username = usernameInput.value;
+  const password = passwordInput.value;
 
-  if (!username || !password) {
-    alert("Username và password không đuộc để trống");
+  document.querySelector(".usernameError").textContent = "";
+  document.querySelector(".passwordError").textContent = "";
+
+  if (!username) {
+    document.querySelector(".usernameError").textContent =
+      "Username không được để trống";
+    usernameInput.focus();
+    return;
+  }
+  if (!password) {
+    document.querySelector(".passwordError").textContent =
+      "Password không được để trống";
+    passwordInput.focus();
     return;
   }
 
@@ -23,4 +36,4 @@ async function login() {
   } catch (error) {
     console.error("Error:", error);
   }
-}
+};

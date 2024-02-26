@@ -19,13 +19,28 @@
       "name": "Sản phẩm 6",
       "price": "10",
       "id": "c0b4"
+    },
+    {
+      "id": "ac25",
+      "name": "Sản phẩm 8",
+      "price": "1"
+    },
+    {
+      "name": "Sản phẩm 9",
+      "price": "100",
+      "id": "4705"
+    },
+    {
+      "name": "Sản phẩm 99",
+      "price": "11",
+      "id": "6bf5"
     }
   ],
   "users": [
     {
       "id": "1",
-      "username": "sweetcter",
-      "password": "dat123"
+      "username": "minhle",
+      "password": "3107"
     }
   ],
   "profile": {
